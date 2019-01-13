@@ -43,31 +43,45 @@
           }
         }
       });
+
+      const Gallery = {
+        div: document.querySelector('.gallery'),
+        items: [],
+        init: function() {
+          for(var i = 0; i < Gallery.div.children.length; i++) {
+            Gallery.items.push(Gallery.div.children[i]);
+          }
+        },
+        displayAllItems: function() {
+          for(var i = 0; i < Gallery.items.length; i++) {
+            Gallery.div.appendChild(Gallery.items[i]);
+          }
+        },
+        search: function(str) {
+          Gallery.div.innerHTML = '';
+          Gallery.displayAllItems();
+          str = str.toLowerCase();
+          for(var i = 0; i < Gallery.div.children.length; i++) {
+            const item = Gallery.div.children[i];
+            let title = item.children[0].children[0].getAttribute('title');
+              title += ' ' + item.children[0].children[0].getAttribute('alt');
+              title = title.toLowerCase();
+            if(!title.includes(str)) {
+              Gallery.div.removeChild(item);
+            }
+          }
+        }
+      };
+
       // init
+      Gallery.init();
       const search = document.querySelector('.search');
       search.removeAttribute('readonly');
       search.style.visibility = 'visible';
       search.setAttribute('placeholder', 'Search...');
       search.addEventListener('keyup', function(){
-        searchGallery(search.value);
+        Gallery.search(search.value);
       });
-
-      function searchGallery(str) {
-        const gallery = document.querySelector('.gallery');
-        str = str.toLowerCase();
-        for(var i = 0; i < gallery.children.length; i++) {
-          //gallery.children[i];
-          const item = gallery.children[i];
-          let title = item.children[0].children[0].getAttribute('title');
-            title += ' ' + item.children[0].children[0].getAttribute('alt');
-            title = title.toLowerCase();
-          if(title.includes(str)) {
-            item.style.display = 'inline';
-          } else {
-            item.style.display = 'none';
-          }
-        }
-      }
     </script>
   </body>
 </html>
