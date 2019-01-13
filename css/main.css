@@ -35,6 +35,12 @@ input {
 }
 
 /* Magnific Popup */
+.mfp-container small {
+  display: block;
+}
+.mfp-counter {
+  text-align: center;
+}
 .mfp-container,
 .mfp-figure {
   position: relative;
