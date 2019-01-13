@@ -47,17 +47,17 @@
       const Gallery = {
         div: document.querySelector('.gallery'),
         items: [],
-        init: function() {
+        init: () => {
           for(var i = 0; i < Gallery.div.children.length; i++) {
             Gallery.items.push(Gallery.div.children[i]);
           }
         },
-        displayAllItems: function() {
+        displayAllItems: () => {
           for(var i = 0; i < Gallery.items.length; i++) {
             Gallery.div.appendChild(Gallery.items[i]);
           }
         },
-        search: function(str) {
+        search: (str) => {
           Gallery.div.innerHTML = '';
           Gallery.displayAllItems();
           str = str.toLowerCase();
@@ -80,9 +80,7 @@
       search.removeAttribute('readonly');
       search.style.visibility = 'visible';
       search.setAttribute('placeholder', 'Search...');
-      search.addEventListener('keyup', function(){
-        Gallery.search(search.value);
-      });
+      search.addEventListener('keyup', () => Gallery.search(search.value));
     </script>
   </body>
 </html>
